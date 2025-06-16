@@ -20,7 +20,6 @@ const LoginPage = () => {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
-
   const validate = () => {
     const newErrors:any = {};
     
@@ -45,6 +44,7 @@ const LoginPage = () => {
         window.location.href='/dashboard'
       }
     } catch (error) {
+      console.log("MUKHUT")
       console.log("Error in the login page : ", error)
     }
   }
@@ -52,7 +52,7 @@ const LoginPage = () => {
      <div className=" min-h-screen bg-gradient-to-bl from-indigo-50 via-sky-100 to-blue-200 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg shadow-md max-w-md w-full">
             <div className="text-center mb-4">
-              <h2 className="text-2xl font-bold text-neutral-800">Welcome back user</h2>
+              <h2 className="text-2xl font-bold text-neutral-800">Se connecter sur E-bail</h2>
             </div>
             <form onSubmit={handleSubmit}>
  
@@ -61,7 +61,7 @@ const LoginPage = () => {
                   htmlFor="email"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  Email Address
+                  Adresse mail
                 </label>
                 <div className="relative">
                   <span className="absolute left-3 top-3 text-gray-400">
@@ -82,13 +82,15 @@ const LoginPage = () => {
                 {errors.email && (
                   <p className="mt-1 text-sm text-red-600">{errors.email}</p>
                 )}
+
+              
               </div>
               <div className=" mb-6">
                 <label
                   htmlFor="password"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  Password
+                  Mot de passe
                 </label>
                 <div className="relative">
                   <span className="absolute left-3 top-3 text-gray-400">
@@ -116,6 +118,7 @@ const LoginPage = () => {
                   <span>{errors.general}</span>
                 </div>
               )}
+
               <div className=" w-full relative">
                 <button
                   type="submit"
@@ -148,7 +151,7 @@ const LoginPage = () => {
                 </svg>
                   ) : (
                     <>
-                    Login
+                    Se connecter
                       <FiLogIn className="ml-2" />
                     </>
                   )}
@@ -157,9 +160,9 @@ const LoginPage = () => {
             </form>
             <div className=" mt-6 text-center text-gray-700">
               <p className="text-sm">
-                Don't have an account?{' '}
+                N'avez-vous pas de compte?{' '}
                 <Link href="/register" className="text-blue-600 hover:underline">
-                  Sign Up
+                  S'inscrire
                 </Link>
               </p>
             </div>

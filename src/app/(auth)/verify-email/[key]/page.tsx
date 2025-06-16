@@ -22,6 +22,15 @@ const VerifyEmailPage = () => {
         //   setErrorMessage(response.error?.message || 'An error occurred while verifying your email');
         //   return;
         // } 
+
+       // Check if response has error
+        if (response?.error) {
+           setStatus("success");
+          // Redirect to dashboard
+          setTimeout(() => {
+           window.location.href = '/dashboard';
+          }, 2000);
+        } 
         
         if (response?.message && response?.access  && response.refresh && response.user ) {
           setStatus("success");
@@ -59,8 +68,8 @@ const VerifyEmailPage = () => {
             </div>
           </div>
         
-          <p className="text-gray-600">Your email has been successfully verified.</p>
-          <p className="mt-2 text-blue-600">Redirecting to dashboard...</p>
+          <p className="text-gray-600">Ton email a été verifié avec succès.</p>
+          <p className="mt-2 text-blue-600">Ne ferme pas la page...</p>
         </div>
       )}
 

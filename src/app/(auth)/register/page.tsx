@@ -20,7 +20,7 @@ import { FiMail, FiLock, FiUser, FiArrowRight, FiCheck } from "react-icons/fi";
     general?: string;
   }
   const [errors, setErrors] = useState<Errors>({});
-
+  const error = ""
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [returnEmail,setReturnEmail] = useState("");
@@ -94,13 +94,13 @@ import { FiMail, FiLock, FiUser, FiArrowRight, FiCheck } from "react-icons/fi";
                     <FiCheck className="text-green-500 text-4xl mb-4 font-black" />
             </div>    
           <h2 className="text-2xl font-bold text-neutral-800">
-            Registration Successful
+            Enregistrement réussi
           </h2>
           <p className="text-gray-600 mt-2 mb-5">
-            Please check your email for verification instructions.
+            Verifie ton email de verification.
           </p>
           <span className=" text-neutral-800 font-semibold text-sm">
-            If you don't see the email, please check your spam folder.
+            Si t'as pas reçu le email, verifie dans le spam svp!.
           </span>
         </div>
       </div>
@@ -110,7 +110,7 @@ import { FiMail, FiLock, FiUser, FiArrowRight, FiCheck } from "react-icons/fi";
     <div className=" min-h-screen bg-gradient-to-bl from-indigo-50 via-sky-100 to-blue-200 flex items-center justify-center">
       <div className="bg-white p-6 rounded-lg shadow-md max-w-md w-full">
         <div className="text-center mb-4">
-          <h2 className="text-2xl font-bold text-neutral-800">Register</h2>
+          <h2 className="text-2xl font-bold text-neutral-800">Enregistrement sur E-bail</h2>
         </div>
         <form onSubmit={handleSubmit}>
           <div className=" mb-4 w-full flex gap-3">
@@ -189,12 +189,19 @@ import { FiMail, FiLock, FiUser, FiArrowRight, FiCheck } from "react-icons/fi";
                 onChange={handleChange}
                 className={`pl-10 pr-4 py-2 w-full border ${
                   errors.email ? "border-red-500" : "border-gray-300"
-                } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors`}
+                } 
+                ${
+                  errors.email ? "border-red-500" : "border-gray-300"
+                }
+                rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors`}
                 placeholder="you@example.com"
               />
             </div>
             {errors.email && (
               <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+            )}
+             {error && (
+              <p className="mt-1 text-sm text-red-600">{error}</p>
             )}
           </div>
           <div className=" mb-4">
@@ -251,6 +258,10 @@ import { FiMail, FiLock, FiUser, FiArrowRight, FiCheck } from "react-icons/fi";
             {errors.password2 && (
               <p className="mt-1 text-sm text-red-600">{errors.password2}</p>
             )}
+
+            {errors.general && (
+              <p className="mt-1 text-sm text-red-600">{errors.general}</p>
+            )}
           </div>
 
           <div className=" w-full relative">
@@ -285,7 +296,7 @@ import { FiMail, FiLock, FiUser, FiArrowRight, FiCheck } from "react-icons/fi";
                 </svg>
               ) : (
                 <>
-                  Create Account
+                  Créer le compte
                   <FiArrowRight className="ml-2" />
                 </>
               )}
@@ -294,9 +305,9 @@ import { FiMail, FiLock, FiUser, FiArrowRight, FiCheck } from "react-icons/fi";
         </form>
         <div className=" mt-6 text-center text-gray-700">
           <p className="text-sm">
-            Already have an account?{" "}
+            Avez-vous un compte?{" "}
             <span className="text-blue-600 hover:text-blue-800 font-medium transition-colors">
-              <Link href="/login">Login</Link>
+              <Link href="/login">Se connecter</Link>
             </span>
           </p>
         </div>
