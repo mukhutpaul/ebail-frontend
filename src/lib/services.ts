@@ -2,6 +2,7 @@
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "@/constants";
 import Cookies from "js-cookie";
 import api from "./api";
+import axios from "axios";
 
  interface User {
   email: string;
@@ -54,20 +55,31 @@ export const AuthService = {
         return res.data
          
     } catch (error) {
-        console.log("Error in AuthService.register:", error);
+        if (axios.isAxiosError(error)) {
+      // Handle Axios-specific errors
+      console.error('Axios Error:', error.message);
+      if (error.response) {
+       
+        process.env.NEXT_PUBLIC_MAIL = error.response.data.email
+        process.env.NEXT_PUBLIC_USERNAME = error.response.data.username
+      }
+    } else {
+      // Handle other errors
+      process.env.NEXT_PUBLIC_GENERAL ="Une erreur inconnue s'est produite"
+    }
       
     }
   },
 
-  login: async (email: string, password: string) => {
+  login: async (username: string, password: string) => {
     try {
     const res = await api.post<LoginResponse>(`${baseURL}/login/`, {
-        email,
+        username,
         password
     });
      if (res.status === 200) {
         const { access, refresh} = res.data;
-
+      
         const cookieOptions = {
             expires: 1,
             secure:process.env.NODE_ENV === 'production',
@@ -80,6 +92,18 @@ export const AuthService = {
         return res.data
      } 
     } catch (error) {
+        if (axios.isAxiosError(error)) {
+      // Handle Axios-specific errors
+      console.error('Axios Error:', error.message);
+      if (error.response) {
+        console.log(error.response.data)
+        process.env.NEXT_PUBLIC_ERROR_LOGIN = error.response.data.error
+       
+      }
+    } else {
+      // Handle other errors
+      process.env.NEXT_PUBLIC_ERROR_LOGIN  ="Une erreur inconnue s'est produite"
+    }
         console.log("Error in AuthService.login: ", error);
     }
   },

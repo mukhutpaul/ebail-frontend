@@ -1,5 +1,6 @@
 'use client'
 import { AuthService } from "@/lib/services";
+import axios from "axios";
 import Link from "next/link";
 import React, { useState } from "react";
 import { FiMail, FiLock, FiUser, FiArrowRight, FiCheck } from "react-icons/fi";
@@ -19,6 +20,21 @@ import { FiMail, FiLock, FiUser, FiArrowRight, FiCheck } from "react-icons/fi";
     noms?: string;
     general?: string;
   }
+
+  interface RegisterData {
+  email: string;
+  password: string;
+  password2: string
+  noms: string;
+  username: string;
+ 
+  }
+  interface RegisterResponse {
+    email:string;
+    user_id:string;
+    message:string;
+  }
+
   const [errors, setErrors] = useState<Errors>({});
   const error = ""
   const [success, setSuccess] = useState(false);
@@ -64,8 +80,8 @@ import { FiMail, FiLock, FiUser, FiArrowRight, FiCheck } from "react-icons/fi";
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
-
     setIsLoading(true);
+
     try {
       const res = await AuthService.register(formData);
       if (res) {
@@ -78,8 +94,11 @@ import { FiMail, FiLock, FiUser, FiArrowRight, FiCheck } from "react-icons/fi";
         username: "",
         noms: "",
       });
+      }else{
+        
       }
     } catch (error) {
+      
       console.error("Registration failed:", error);
       setErrors({ general: "Registration failed. Please try again." });
     } finally {
@@ -111,6 +130,7 @@ import { FiMail, FiLock, FiUser, FiArrowRight, FiCheck } from "react-icons/fi";
       <div className="bg-white p-6 rounded-lg shadow-md max-w-md w-full">
         <div className="text-center mb-4">
           <h2 className="text-2xl font-bold text-neutral-800">Enregistrement sur E-bail</h2>
+          
         </div>
         <form onSubmit={handleSubmit}>
           <div className=" mb-4 w-full flex gap-3">
@@ -262,6 +282,19 @@ import { FiMail, FiLock, FiUser, FiArrowRight, FiCheck } from "react-icons/fi";
             {errors.general && (
               <p className="mt-1 text-sm text-red-600">{errors.general}</p>
             )}
+
+            {process.env.NEXT_PUBLIC_MAIL && (
+              <p className="mt-1 text-sm text-red-600">{process.env.NEXT_PUBLIC_MAIL}</p>
+            )}
+
+            {process.env.NEXT_PUBLIC_USERNAME && (
+              <p className="mt-1 text-sm text-red-600">{process.env.NEXT_PUBLIC_USERNAME }</p>
+            )}
+
+             {process.env.NEXT_PUBLIC_GENERAL && (
+              <p className="mt-1 text-sm text-red-600">{process.env.NEXT_PUBLIC_GENERAL }</p>
+            )} 
+
           </div>
 
           <div className=" w-full relative">
