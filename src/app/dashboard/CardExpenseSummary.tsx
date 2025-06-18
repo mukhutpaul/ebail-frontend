@@ -52,7 +52,7 @@ const CardExpenseSummary = () => {
           {/* HEADER */}
           <div>
             <h2 className="text-lg font-semibold mb-2 px-7 pt-5">
-              Expense Summary
+             Maison 1
             </h2>
             <hr />
           </div>
