@@ -5,12 +5,12 @@ import React, { useState } from 'react'
 import { FiMail, FiLock, FiLogIn, FiAlertCircle, FiUser } from 'react-icons/fi';
 
 const LoginPage = () => {
-     const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     username: '',
     password: '',
   });
   const [errors, setErrors] = useState<{[key: string]: string}>({});
- const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
     const handleChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -31,6 +31,10 @@ const LoginPage = () => {
       newErrors.password = 'Mot de passe requis';
       setIsLoading(false);
     }
+           
+    if (process.env.NEXT_PUBLIC_ERROR_LOGIN){
+       setIsLoading(false);
+    }
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -48,6 +52,8 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.log("Error in the login page : ", error)
+    }finally {
+      setIsLoading(false);
     }
   }
   return (
@@ -78,7 +84,7 @@ const LoginPage = () => {
                     className={`pl-10 pr-4 py-2 w-full border ${
                       errors.email ? "border-red-500" : "border-gray-300"
                     } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors`}
-                    placeholder="you@example.com"
+                    placeholder="username"
                   />
                 </div>
                 {errors.email && (
@@ -107,13 +113,14 @@ const LoginPage = () => {
                     className={`pl-10 pr-4 py-2 w-full border ${
                       errors.password ? "border-red-500" : "border-gray-300"
                     } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors`}
-                    placeholder="At least 8 characters"
+                    placeholder="au moins 8 caractères "
                   />
                 </div>
                 {errors.password && (
                   <p className="mt-1 text-sm text-red-600">{errors.password}</p>
                 )}
               {process.env.NEXT_PUBLIC_ERROR_LOGIN && (
+              
               <p className="mt-1 text-sm text-red-600">{process.env.NEXT_PUBLIC_ERROR_LOGIN }</p>
                )}
               </div>
