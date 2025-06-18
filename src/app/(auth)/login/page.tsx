@@ -32,9 +32,6 @@ const LoginPage = () => {
       setIsLoading(false);
     }
            
-    if (process.env.NEXT_PUBLIC_ERROR_LOGIN){
-       setIsLoading(false);
-    }
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
