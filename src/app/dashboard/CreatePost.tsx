@@ -56,9 +56,15 @@ const CreatePostModal = ({
         <Header name="Créer un Nouveau Post" />
         <form onSubmit={handleSubmit} className="mt-5">
           {/* PRODUCT NAME */}
-          <label htmlFor="productName" className={labelCssStyles}>
+          <div className="flex flex-row justify-between">
+          <label htmlFor="productName" className={`${labelCssStyles} flex-wrap`}>
             Post Name
           </label>
+           <label htmlFor="productPrice" className={`${labelCssStyles}`}>
+            Price        
+          </label>
+        </div>
+          <div className="flex flex-row justify-between gap-3">
           <input
             type="text"
             name="name"
@@ -70,9 +76,6 @@ const CreatePostModal = ({
           />
 
           {/* PRICE */}
-          <label htmlFor="productPrice" className={labelCssStyles}>
-            Price
-          </label>
           <input
             type="number"
             name="price"
@@ -82,7 +85,7 @@ const CreatePostModal = ({
             className={inputCssStyles}
             required
           />
-
+        </div>
           {/* STOCK QUANTITY */}
           <label htmlFor="stockQuantity" className={labelCssStyles}>
             Stock Quantity
