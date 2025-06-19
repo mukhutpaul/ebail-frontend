@@ -17,9 +17,18 @@ import StatCard from "./StatCard";
 import DashboardWrapper from "@/app/dashboardWrapper";
 import DashWrapper from "../dashWrapper";
 import Header from "../(components)/Header";
+import { useState } from "react";
+import CreatePostModal from "./CreatePost";
 
 const Dashboard = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  if (isLoading) {
+    return <div className="py-4">Loading...</div>;
+  }
   return (
+    
     <DashWrapper>
     <div className="mx-auto pb-5 w-full">
         {/* SEARCH BAR */}
@@ -39,22 +48,26 @@ const Dashboard = () => {
             <Header name="Maisons" />
             <button
             className="flex items-center bg-blue-500 hover:bg-blue-700 text-gray-200 font-bold py-2 px-4 rounded"
-            onClick={() =>{}}>
+            onClick={() => setIsModalOpen(true)}>
                 <PlusCircleIcon className="w-5 mr-2 !text-gray-200" />
                 Poster une maison
             </button>
         </div>
       </div>
     <div className="grid grid-cols-1  md:grid-cols-2 xl:grid-cols-3 xl:overflow-auto gap-10 pb-4 custom-grid-rows">
-  
+
       <CardExpenseSummary />
       <CardExpenseSummary />
       <CardExpenseSummary />
       <CardExpenseSummary />
 
-      
-      
     </div>
+    {/* MODAL */}
+    <CreatePostModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onCreate={()=>{}}
+      />
   </DashWrapper>
   );
 };

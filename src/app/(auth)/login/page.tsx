@@ -80,7 +80,7 @@ const LoginPage = () => {
                     value={formData.username}
                     onChange={handleChange}
                     className={`pl-10 pr-4 py-2 w-full border ${
-                      errors.email ? "border-red-500" : "border-gray-300"
+                      errors.username ? "border-red-500" : "border-gray-300"
                     } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors`}
                     placeholder="username"
                   />
