@@ -4,7 +4,7 @@ import {
 } from "@/state/api";
 import { PlusCircleIcon, TrendingUp } from "lucide-react";
 import Image from "next/image";
-import { FiPhone, FiPlus } from "react-icons/fi";
+import { FiPhone, FiPlus, FiUser } from "react-icons/fi";
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 
 type ExpenseSums = {
@@ -61,8 +61,11 @@ const CardExpenseSummary = () => {
             </button>
 
             <button className="flex items-center bg-blue-500 hover:bg-blue-700 text-gray-200 font-bold py-2 px-4 rounded-full">
-              <PlusCircleIcon className="w-5 mr-2 !text-gray-200"/><p color="red">plus</p>
+              <PlusCircleIcon color="yellow" className="w-5 mr-2 !text-gray-200"/><p color="red">plus</p>
             </button>
+            </div>
+            <div className="flex flex-row gap-3">
+            <FiUser color="red" size={30}/> <p>Paul MUKHUT</p>
             </div>
           </h2>
         </div>
