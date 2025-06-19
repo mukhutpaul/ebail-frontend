@@ -45,33 +45,14 @@ const Dashboard = () => {
             </button>
         </div>
       </div>
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 xl:overflow-auto gap-10 pb-4 custom-grid-rows">
+    <div className="grid grid-cols-1  md:grid-cols-2 xl:grid-cols-3 xl:overflow-auto gap-10 pb-4 custom-grid-rows">
+  
+      <CardExpenseSummary />
+      <CardExpenseSummary />
+      <CardExpenseSummary />
+      <CardExpenseSummary />
+
       
-     {/* <CardPopularProducts /> */} 
-      {/* <CardSalesSummary /> */}
-      {/* <CardPurchaseSummary /> */}
-      <CardExpenseSummary />
-      <CardExpenseSummary />
-      <CardExpenseSummary />
-      {/* <StatCard
-        title="Customer & Expenses"
-        primaryIcon={<Package className="text-blue-600 w-6 h-6" />}
-        dateRange="22 - 29 October 2023"
-        details={[
-          {
-            title: "Customer Growth",
-            amount: "175.00",
-            changePercentage: 131,
-            IconComponent: TrendingUp,
-          },
-          {
-            title: "Expenses",
-            amount: "10.00",
-            changePercentage: -56,
-            IconComponent: TrendingDown,
-          },
-        ]}
-      /> */}
       
     </div>
   </DashWrapper>
