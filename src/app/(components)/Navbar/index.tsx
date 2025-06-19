@@ -26,12 +26,12 @@ const Navbar = () => {
     <div className="flex justify-between items-center w-full mb-3">
       {/* LEFT SIDE */}
       <div className="flex justify-between items-center gap-5">
-        {/* <button
+        <button
           className="px-3 py-3 bg-gray-100 rounded-full hover:bg-blue-100"
           onClick={toggleSidebar}
         >
           <Menu className="w-4 h-4" />
-        </button> */}
+        </button>
 
         <div className="relative">
           <input

@@ -23,7 +23,7 @@ const LoginPage = () => {
     const newErrors:any = {};
     
     if (!formData.username.trim()) {
-      newErrors.email = 'Nom utilisateur est requis';
+      newErrors.username = 'Nom utilisateur est requis';
       setIsLoading(false);
     }
     
@@ -48,6 +48,7 @@ const LoginPage = () => {
         window.location.href='/dashboard'
       }
     } catch (error) {
+      setIsLoading(false);
       console.log("Error in the login page : ", error)
     }finally {
       setIsLoading(false);
@@ -84,8 +85,8 @@ const LoginPage = () => {
                     placeholder="username"
                   />
                 </div>
-                {errors.email && (
-                  <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                {errors.username && (
+                  <p className="mt-1 text-sm text-red-600">{errors.username}</p>
                 )}
 
               
