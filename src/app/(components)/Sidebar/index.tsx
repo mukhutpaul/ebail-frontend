@@ -109,10 +109,10 @@ const Sidebar = () => {
         <SidebarLink
           href="/dashboard"
           icon={Layout}
-          label="Dashboard"
+          label="Tableau de bord"
           isCollapsed={isSidebarCollapsed}
         />
-        <SidebarLink
+        {/* <SidebarLink
           href="/inventory"
           icon={Archive}
           label="Inventory"
@@ -141,7 +141,7 @@ const Sidebar = () => {
           icon={CircleDollarSign}
           label="Expenses"
           isCollapsed={isSidebarCollapsed}
-        />
+        /> */}
       </div>
 
       {/* FOOTER */}
