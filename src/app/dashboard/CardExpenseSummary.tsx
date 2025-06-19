@@ -4,7 +4,7 @@ import {
 } from "@/state/api";
 import { PlusCircleIcon, TrendingUp } from "lucide-react";
 import Image from "next/image";
-import { FiPhone, FiPlus, FiUser } from "react-icons/fi";
+import { FiMail, FiPhone, FiPlus, FiUser } from "react-icons/fi";
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 
 type ExpenseSums = {
@@ -64,8 +64,14 @@ const CardExpenseSummary = () => {
               <PlusCircleIcon color="yellow" className="w-5 mr-2 !text-gray-200"/><p color="red">plus</p>
             </button>
             </div>
-            <div className="flex flex-row gap-3">
-            <FiUser color="red" size={30}/> <p>Paul MUKHUT</p>
+            
+            <div className="flex flex-row justify-between gap-3">
+            <button className="flex gap-3">
+            <FiUser color="red" size={30}/><p>Paul MUKHUT</p>
+            </button>
+             <button className="flex items-center mt-2 bg-red-500 hover:bg-yellow-700 text-gray-200 font-bold py-2 px-4 rounded-full">
+              <FiMail color="red" className="w-5 mr-2 !text-gray-200"/><p color="red">chat</p>
+            </button>
             </div>
           </h2>
         </div>
