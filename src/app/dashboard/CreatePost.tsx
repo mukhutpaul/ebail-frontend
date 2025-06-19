@@ -52,8 +52,8 @@ const CreatePostModal = ({
 
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-20">
-      <div className="relative top-20 mx-auto p-5 border w-7/12 shadow-lg rounded-md bg-white">
-        <Header name="Créer un Nouveau Post" />
+      <div className="relative top-20 mx-auto p-5 border w-4/6 shadow-lg rounded-md bg-white">
+        <Header name="Créer un Post" />
         <form onSubmit={handleSubmit} className="mt-5">
           {/* PRODUCT NAME */}
           <div className="flex flex-row justify-between">
