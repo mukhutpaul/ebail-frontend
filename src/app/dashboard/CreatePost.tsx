@@ -1,6 +1,7 @@
 import { v4 } from "uuid";
 import Header from "@/app/(components)/Header";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useRef, useState } from "react";
+import Image from "next/image";
 
 type ProductFormData = {
   name: string;
@@ -28,6 +29,22 @@ const CreatePostModal = ({
     rating: 0,
   });
 
+
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [uploadStatus, setUploadStatus] = useState<string>('');
+
+  const [isUploading, setIsUploading] = useState(false);
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      setSelectedFile(event.target.files[0]);
+    }
+  };
+
+  
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
@@ -44,6 +61,7 @@ const CreatePostModal = ({
     onCreate(formData);
     onClose();
   };
+
 
   if (!isOpen) return null;
 
@@ -72,7 +90,6 @@ const CreatePostModal = ({
             onChange={handleChange}
             value={formData.name}
             className={inputCssStyles}
-            required
           />
 
           {/* PRICE */}
@@ -83,7 +100,6 @@ const CreatePostModal = ({
             onChange={handleChange}
             value={formData.price}
             className={inputCssStyles}
-            required
           />
         </div>
           {/* STOCK QUANTITY */}
@@ -97,7 +113,6 @@ const CreatePostModal = ({
             onChange={handleChange}
             value={formData.stockQuantity}
             className={inputCssStyles}
-            required
           />
 
           {/* RATING */}
@@ -107,14 +122,48 @@ const CreatePostModal = ({
           <input
             type="number"
             name="rating"
-            placeholder="Rating"
+            placeholder="image"
             onChange={handleChange}
             value={formData.rating}
             className={inputCssStyles}
-            required
           />
 
+          <input 
+          ref={fileInputRef}
+          disabled={isUploading}
+          type="file" 
+          className="absolute right-[9999px]"
+          onChange={(e) => {
+            const file = e.target.files?.[0] as File;
+            console.log(file)
+            setIsUploading(true)
+            const data = new FormData();
+            data.set("file",file)
+            
+          }}   
+          />
+
+          <Image
+          //selectedFile? selectedFile.name:
+              src={`${`/kinshasa.png`}`}
+              alt="maison"
+              width={150}
+              height={100}
+              className="mb-3 rounded-2xl w-100 h-100 justify-center"
+          />
+          <button
+            type="button"
+            disabled={isUploading}
+            onClick={() =>{
+              fileInputRef.current?.click()
+            }}
+            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+          >
+            {isUploading ? "Chargement..." : "Parcourir"}
+          </button>
+
           {/* CREATE ACTIONS */}
+          <br/>
           <button
             type="submit"
             className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"

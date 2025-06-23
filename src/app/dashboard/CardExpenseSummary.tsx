@@ -50,7 +50,7 @@ const CardExpenseSummary = () => {
           {/* HEADER */}
           <div>
             <hr />
-          <h2 className="text-lg font-semibold mb-2 px-7 pt-5">
+          <h6 className="text-lg font-semibold mb-2 px-7 pt-5">
             <div className="flex flex-row justify-between">
             <p>Vente parcelle</p>
             <p>Montant : 4500000$</p>
@@ -73,7 +73,7 @@ const CardExpenseSummary = () => {
               <FiMail color="red" className="w-5 mr-2 !text-gray-200"/><p color="red">chat</p>
             </button>
             </div>
-          </h2>
+          </h6>
         </div>
         </>
       )}
