@@ -1,75 +1,150 @@
 "use client";
 
-import {
-  CheckCircle,
-  Package,
-  PlusCircleIcon,
-  SearchIcon,
-  Tag,
-  TrendingDown,
-  TrendingUp,
-} from "lucide-react";
-import CardExpenseSummary from "./CardExpenseSummary";
-import CardPopularProducts from "./CardPopularProducts";
-import CardPurchaseSummary from "./CardPurchaseSummary";
-import CardSalesSummary from "./CardSalesSummary";
-import StatCard from "./StatCard";
-import DashboardWrapper from "@/app/dashboardWrapper";
-import DashWrapper from "../dashWrapper";
-import Header from "../(components)/Header";
+import { PlusCircleIcon, SearchIcon } from "lucide-react";
 import { useState } from "react";
+import Header from "@/app/(components)/Header";
+import Rating from "@/app/(components)/Rating";
+import Image from "next/image";
+import DashWrapper from "../dashWrapper";
 import CreatePostModal from "./CreatePost";
+import { useGetPostsQuery } from "@/state/api";
+import { FiMail, FiPhone, FiUser } from "react-icons/fi";
 
-const Dashboard = () => {
-  const [isLoading, setIsLoading] = useState(false);
+type ProductFormData = {
+  name: string;
+  price: number;
+  stockQuantity: number;
+  rating: number;
+};
+
+const Post = () => {
+  const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const {
+    data: posts,
+    isLoading,
+    isError,
+  } = useGetPostsQuery();
+
+  //const [createPost] = useCreateProductMutation();
+  // const handleCreateProduct = async (productData: ProductFormData) => {
+  //   await createProduct(productData);
+  // };
 
   if (isLoading) {
     return <div className="py-4">Loading...</div>;
   }
+
+  if (isError || !posts) {
+    return (
+      <div className="text-center text-red-500 py-4">
+        Echec de chargement de posts
+      </div>
+    );
+  }
+
   return (
-    
     <DashWrapper>
     <div className="mx-auto pb-5 w-full">
-        {/* SEARCH BAR */}
-        <div className="mb-6">
-            <div className="flex items-center border-2 border-gray-200 rounded">
-                <SearchIcon className="w-5 h-5 text-gray-500 m-2"/>
-                <input className="w-full py-2 px-4 rounded bg-white" 
-                placeholder="Search products..." 
-                // value={}
-                onChange={(e) =>{}}
-                />
-            </div>
-        </div>
-
-        {/* HEADER BAR*/}
-        <div className="flex justify-between items-center mb-6">
-            <Header name="Maisons" />
-            <button
-            className="flex items-center bg-blue-500 hover:bg-blue-700 text-gray-200 font-bold py-2 px-4 rounded"
-            onClick={() => setIsModalOpen(true)}>
-                <PlusCircleIcon className="w-5 mr-2 !text-gray-200" />
-                Poster une maison
-            </button>
+      {/* SEARCH BAR */}
+      <div className="mb-6">
+        <div className="flex items-center border-2 border-gray-200 rounded">
+          <SearchIcon className="w-5 h-5 text-gray-500 m-2" />
+          <input
+            className="w-full py-2 px-4 rounded bg-white"
+            placeholder="Search products..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
       </div>
-    <div className="grid grid-cols-1  md:grid-cols-2 xl:grid-cols-3 xl:overflow-auto gap-10 pb-4 custom-grid-rows">
 
-      <CardExpenseSummary />
-      <CardExpenseSummary />
-      <CardExpenseSummary />
-      <CardExpenseSummary />
+      {/* HEADER BAR */}
+      <div className="flex justify-between items-center mb-6">
+        <Header name="Maisons" />
+        <button
+          className="flex items-center bg-blue-500 hover:bg-blue-700 text-gray-200 font-bold py-2 px-4 rounded"
+          onClick={() => setIsModalOpen(true)}
+        >
+          <PlusCircleIcon className="w-5 h-5 mr-2 !text-gray-200" /> Créer un post
+        </button>
+      </div>
 
-    </div>
+      {/* BODY PRODUCTS LIST */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 lg-grid-cols-3 gap-10 justify-between">
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          posts?.map((post) => (
+            <div
+              key={post.id}
+              className="border shadow rounded-md p-4 max-w-full w-full mx-auto bg-white"
+            >
+              <h1 className="text-lg text-gray-900 font-semibold items-center">
+                 {post.location ==true ? "En Location" : "A Vendre"}
+              </h1>
+              <hr className="bg-white"/>
+              <div className="flex flex-col bg-white">
+                <Image
+                  src={`/kinshasa.png`}
+                  alt={post.content}
+                  width={600}
+                  height={500}
+                />
+                <hr />
+                <div className="flex flex-row justify-between">
+                <h3 className="text-lg text-gray-900 font-semibold">
+                  {post.content}
+                </h3>
+                <p className="text-gray-800">${post.price}</p>
+                </div>
+                 <p className="text-gray-800">{post.adresse}</p>
+                <div className="text-sm text-gray-600 mt-1">
+
+                <div className="flex flex-row gap-3 justify-between">
+                    <button className="flex flex-row gap-3">
+                    <FiPhone color="red" size={30}/>  +243 816 932 639
+                    </button>
+
+                    <button className="flex items-center bg-blue-500 hover:bg-blue-700 text-gray-200 font-bold py-2 px-4 rounded-full">
+                      <PlusCircleIcon color="yellow" className="w-5 mr-2 !text-gray-200"/><p color="red">plus</p>
+                    </button>
+               </div>
+
+                <div className="flex flex-row justify-between gap-3">
+                    <button className="flex gap-3">
+                    <FiUser color="red" size={30}/><p>{post.user_id}</p>
+                    </button>
+                    <button className="flex items-center mt-2 bg-red-500 hover:bg-yellow-700 text-gray-200 font-bold py-2 px-4 rounded-full">
+                    <FiMail color="red" className="w-5 mr-2 !text-gray-200"/><p color="red">chat</p>
+                    </button>
+                </div>
+                  {/* Stock: {product.stockQuantity} */}
+                </div>
+                {/* {product.rating && (
+                  <div className="flex items-center mt-2">
+                    <Rating rating={product.rating} />
+                  </div>
+                )} */}
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+      
     {/* MODAL */}
+
     <CreatePostModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onCreate={()=>{}}
       />
+    </div>
+
   </DashWrapper>
+
   );
 };
 
-export default Dashboard;
+export default Post;

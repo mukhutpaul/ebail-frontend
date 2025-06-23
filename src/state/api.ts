@@ -1,15 +1,17 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export interface Product {
-  productId: string;
-  name: string;
+export interface Post {
+  id: string;
+  content: string;
+  location: boolean;
+  adresse: string;
   price: number;
-  rating?: number;
-  stockQuantity: number;
+  user_id: string;
+  created_at: string;
 }
 
 export interface NewProduct {
-  name: string;
+  name: string
   price: number;
   rating?: number;
   stockQuantity: number;
@@ -42,13 +44,7 @@ export interface ExpenseByCategorySummary {
   date: string;
 }
 
-export interface DashboardMetrics {
-  popularProducts: Product[];
-  salesSummary: SalesSummary[];
-  purchaseSummary: PurchaseSummary[];
-  expenseSummary: ExpenseSummary[];
-  expenseByCategorySummary: ExpenseByCategorySummary[];
-}
+
 
 export interface User {
   userId: string;
@@ -59,31 +55,19 @@ export interface User {
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
   reducerPath: "api",
-  tagTypes: ["DashboardMetrics", "Products", "Users", "Expenses"],
+  tagTypes: ["DashboardMetrics", "Posts", "Users", "Expenses"],
   endpoints: (build) => ({
-    getDashboardMetrics: build.query<DashboardMetrics, void>({
-      query: () => "/dashboard",
-      providesTags: ["DashboardMetrics"],
-    }),
-    getProducts: build.query<Product[], string | void>({
+
+
+    getPosts: build.query<Post[], string | void>({
       query: (search) => ({
-        url: "/products",
+        url: "/api/posts/",
         params: search ? { search } : {},
       }),
-      providesTags: ["Products"],
+      providesTags: ["Posts"],
     }),
-    createProduct: build.mutation<Product, NewProduct>({
-      query: (newProduct) => ({
-        url: "/products",
-        method: "POST",
-        body: newProduct,
-      }),
-      invalidatesTags: ["Products"],
-    }),
-    getUsers: build.query<User[], void>({
-      query: () => "/users",
-      providesTags: ["Users"],
-    }),
+
+    
     getExpensesByCategory: build.query<ExpenseByCategorySummary[], void>({
       query: () => "/expenses",
       providesTags: ["Expenses"],
@@ -92,9 +76,6 @@ export const api = createApi({
 });
 
 export const {
-  useGetDashboardMetricsQuery,
-  useGetProductsQuery,
-  useCreateProductMutation,
-  useGetUsersQuery,
+  useGetPostsQuery,
   useGetExpensesByCategoryQuery,
 } = api;
