@@ -8,7 +8,7 @@ import Image from "next/image";
 import DashWrapper from "../dashWrapper";
 import CreatePostModal from "./CreatePost";
 import { useGetPostsQuery } from "@/state/api";
-import { FiMail, FiPhone, FiUser } from "react-icons/fi";
+import { FiDollarSign, FiHome, FiMail, FiPhone, FiUser } from "react-icons/fi";
 
 type ProductFormData = {
   name: string;
@@ -81,8 +81,9 @@ const Post = () => {
               key={post.id}
               className="border shadow rounded-md p-4 max-w-full w-full mx-auto bg-white"
             >
-              <h1 className="text-lg text-gray-900 font-semibold items-center">
+              <h1 className="text-lg text-gray-900 font-semibold items-center justify-between">
                  {post.location ==true ? "En Location" : "A Vendre"}
+                 {/* <p>{post.created_at}</p> */}
               </h1>
               <hr className="bg-white"/>
               <div className="flex flex-col bg-white">
@@ -93,18 +94,18 @@ const Post = () => {
                   height={500}
                 />
                 <hr />
-                <div className="flex flex-row justify-between">
-                <h3 className="text-lg text-gray-900 font-semibold">
-                  {post.content}
-                </h3>
-                <p className="text-gray-800">${post.price}</p>
+                <div className="flex flex-row gap-1 mt-3 mb-2">
+                <FiDollarSign color="blue" size={20}/>
+                <h2 className="text-gray-800">{post.price}</h2>
                 </div>
-                 <p className="text-gray-800">{post.adresse}</p>
+                <p className="flex flex-row gap-3 mt-2 mb-2">
+                 <FiHome color="blue" size={20}/><p className="text-gray-800">{post.adresse}</p>
+                 </p>
                 <div className="text-sm text-gray-600 mt-1">
 
-                <div className="flex flex-row gap-3 justify-between">
+                <div className="flex flex-row gap-3 justify-between mt-2 mb-2">
                     <button className="flex flex-row gap-3">
-                    <FiPhone color="red" size={30}/>  +243 816 932 639
+                    <FiPhone color="red" size={20}/>  +243 816 932 639
                     </button>
 
                     <button className="flex items-center bg-blue-500 hover:bg-blue-700 text-gray-200 font-bold py-2 px-4 rounded-full">
@@ -112,14 +113,16 @@ const Post = () => {
                     </button>
                </div>
 
-                <div className="flex flex-row justify-between gap-3">
+                <div className="flex flex-row justify-between gap-3 mt-2 mb-2">
                     <button className="flex gap-3">
-                    <FiUser color="red" size={30}/><p>{post.user_id}</p>
+                    <FiUser color="red" size={20}/><p>{post.user_id}</p>
                     </button>
                     <button className="flex items-center mt-2 bg-red-500 hover:bg-yellow-700 text-gray-200 font-bold py-2 px-4 rounded-full">
                     <FiMail color="red" className="w-5 mr-2 !text-gray-200"/><p color="red">chat</p>
                     </button>
                 </div>
+                <hr className="mt-2"/>
+                <p className="mt-3 gap-2">Description : {post.content}</p>
                   {/* Stock: {product.stockQuantity} */}
                 </div>
                 {/* {product.rating && (
