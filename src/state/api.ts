@@ -8,13 +8,20 @@ export interface ImagePost {
   id_post: string;
 }
 
+export interface User {
+  id: string;
+  noms: string;
+  phone: string;
+  photo: string;
+}
+
 export interface Post {
   id: string;
   content: string;
   location: boolean;
   adresse: string;
   price: number;
-  user_id: string;
+  user_id: User[];
   created_at: string;
   imagepost_set: ImagePost[];
 }

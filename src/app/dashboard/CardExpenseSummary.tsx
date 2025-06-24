@@ -94,7 +94,7 @@ const CardExpenseSummary = () => {
             
             <div className="flex flex-row justify-between gap-3">
             <button className="flex gap-3">
-            <FiUser color="red" size={30}/><p>{post.user_id}</p>
+            <FiUser color="red" size={30}/><p>{post.user_id[1].id}</p>
             </button>
              <button className="flex items-center mt-2 bg-red-500 hover:bg-yellow-700 text-gray-200 font-bold py-2 px-4 rounded-full">
               <FiMail color="red" className="w-5 mr-2 !text-gray-200"/><p color="red">chat</p>
