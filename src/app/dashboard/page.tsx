@@ -21,11 +21,8 @@ const Post = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const {
-    data: posts,
-    isLoading,
-    isError,
-  } = useGetPostsQuery();
+  const {data: posts,isLoading,isError} = useGetPostsQuery();
+  
 
   //const [createPost] = useCreateProductMutation();
   // const handleCreateProduct = async (productData: ProductFormData) => {
@@ -83,16 +80,20 @@ const Post = () => {
             >
               <h1 className="text-lg text-gray-900 font-semibold items-center justify-between">
                  {post.location ==true ? "En Location" : "A Vendre"}
-                 {/* <p>{post.created_at}</p> */}
+                
               </h1>
+
               <hr className="bg-white"/>
               <div className="flex flex-col bg-white">
+                <div className="items-center mt-2">
                 <Image
-                  src={`/kinshasa.png`}
+                  src={post.imagepost_set[0]?.url}
                   alt={post.content}
                   width={600}
-                  height={500}
+                  height={300}  
+                  className="h-80"
                 />
+                </div>
                 <hr />
                 <div className="flex flex-row gap-1 mt-3 mb-2">
                 <FiDollarSign color="blue" size={20}/>
@@ -112,7 +113,8 @@ const Post = () => {
                       <PlusCircleIcon color="yellow" className="w-5 mr-2 !text-gray-200"/><p color="red">plus</p>
                     </button>
                </div>
-
+              
+              
                 <div className="flex flex-row justify-between gap-3 mt-2 mb-2">
                     <button className="flex gap-3">
                     <FiUser color="red" size={20}/><p>{post.user_id}</p>
