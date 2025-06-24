@@ -86,12 +86,15 @@ const Post = () => {
               <hr className="bg-white"/>
               <div className="flex flex-col bg-white">
                 <div className="items-center mt-5">
+                 {post.user[0]?.id[4]}
                 <Image
                   src={post.imagepost_set[0]?.url}
                   alt={post.content}
                   width={600}
                   height={300}  
                   className="h-80 mb-5"
+                  quality={95}
+                  placeholder="empty"
                 />
                 </div>
                 <hr className="bg-gray-950 border-b-gray-950" />
@@ -117,7 +120,7 @@ const Post = () => {
               
                 <div className="flex flex-row justify-between gap-3 mt-2 mb-2">
                     <button className="flex gap-3">
-                    <FiUser color="red" size={20}/><p>JP{post.user_id[0].name}</p>
+                    <FiUser color="red" size={20}/><p>JP{post.imagepost_set[0]?.id_post}</p>
                     </button>
                     <button className="flex items-center mt-2 bg-red-500 hover:bg-yellow-700 text-gray-200 font-bold py-2 px-4 rounded-full">
                     <FiMail color="red" className="w-5 mr-2 !text-gray-200"/><p color="red">chat</p>

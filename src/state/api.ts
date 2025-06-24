@@ -7,12 +7,24 @@ export interface ImagePost {
   url: string;
   id_post: string;
 }
-
 export interface User {
   id: string;
-  noms: string;
+  last_login: string;
+  is_superuser: string;
+  first_name:string;
+  last_name : string;
+  is_staff: boolean;
+  is_active : boolean;
+  date_joined: string;
+  email : string;
+  password: string;
+  username : string;
+  noms : string;
+  photo_url : string,
   phone: string;
-  photo: string;
+  profile: string;
+  groups: [];
+  user_permissions: [];
 }
 
 export interface Post {
@@ -21,52 +33,18 @@ export interface Post {
   location: boolean;
   adresse: string;
   price: number;
-  user_id: User[];
+  user : User[];
   created_at: string;
   imagepost_set: ImagePost[];
 }
 
-export interface NewProduct {
+export interface NewPost {
   name: string
   price: number;
   rating?: number;
   stockQuantity: number;
 }
 
-export interface SalesSummary {
-  salesSummaryId: string;
-  totalValue: number;
-  changePercentage?: number;
-  date: string;
-}
-
-export interface PurchaseSummary {
-  purchaseSummaryId: string;
-  totalPurchased: number;
-  changePercentage?: number;
-  date: string;
-}
-
-export interface ExpenseSummary {
-  expenseSummarId: string;
-  totalExpenses: number;
-  date: string;
-}
-
-export interface ExpenseByCategorySummary {
-  expenseByCategorySummaryId: string;
-  category: string;
-  amount: string;
-  date: string;
-}
-
-
-
-export interface User {
-  userId: string;
-  name: string;
-  email: string;
-}
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
@@ -82,15 +60,10 @@ export const api = createApi({
       providesTags: ["Posts"],
     }),
 
-    
-    getExpensesByCategory: build.query<ExpenseByCategorySummary[], void>({
-      query: () => "/expenses",
-      providesTags: ["Expenses"],
-    }),
   }),
 });
 
 export const {
   useGetPostsQuery,
-  useGetExpensesByCategoryQuery,
+
 } = api;
