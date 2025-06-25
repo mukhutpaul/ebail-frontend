@@ -36,6 +36,8 @@ const CreatePostModal = ({
   const [uploadStatus, setUploadStatus] = useState<string>('');
 
   const [isUploading, setIsUploading] = useState(false);
+  
+  const [isPhotos, SetIsPhotos] = useState(true);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null)
 
@@ -61,7 +63,15 @@ const CreatePostModal = ({
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onCreate(formData);
+    //onClose();
+    SetIsPhotos(false)
+  };
+
+   const handlePhotos = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onCreate(formData);
     onClose();
+    SetIsPhotos(true)
   };
 
 
@@ -73,8 +83,69 @@ const CreatePostModal = ({
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-20">
       <div className="relative top-20 mx-auto p-5 border w-4/6 shadow-lg rounded-md bg-white">
+      {isPhotos ? (
+        <>
         <Header name="Créer un Post" />
         <form onSubmit={handleSubmit} className="mt-5">
+       
+          {/* STOCK QUANTITY */}
+          {/* <label htmlFor="stockQuantity" className={labelCssStyles}>
+            Description
+          </label>
+          <input
+            type="text"
+            name="description"
+            placeholder="Description"
+            onChange={handleChange}
+            value={formData.content}
+            className={inputCssStyles}
+          /> */}
+
+           {/* Content */}
+          <label htmlFor="rating" className={labelCssStyles}>
+            Description
+          </label>
+          <textarea className={inputCssStyles}/>
+          {/* ADRESSE*/}
+          <label htmlFor="rating" className={labelCssStyles}>
+            Adresse
+          </label>
+          <textarea className={inputCssStyles}/>
+
+           {/* LOCATION */}
+          <div className="flex flex-row gap-3">
+          <label htmlFor="rating" className={`${labelCssStyles} mt-2`}>
+            Location
+          </label>
+          <input
+            type="checkbox"
+            name="location"
+            onChange={handleChange}
+            className="mt-2"
+          />
+          </div>
+
+          {/* CREATE ACTIONS */}
+          <br/>
+          <button
+            type="submit"
+            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+          >
+            Suivant
+          </button>
+          <button
+            onClick={onClose}
+            type="button"
+            className="ml-2 px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-700"
+          >
+            Annuler
+          </button>
+        </form>
+      </>
+      ):(
+        <>
+        <Header name="Téléchargement des photos" />
+        <form onSubmit={handlePhotos} className="mt-5">
        
           {/* STOCK QUANTITY */}
           {/* <label htmlFor="stockQuantity" className={labelCssStyles}>
@@ -127,7 +198,6 @@ const CreatePostModal = ({
             
           }}   
           />
-
           <Image
           //selectedFile? selectedFile.name:
               src={`${`/kinshasa.png`}`}
@@ -163,6 +233,11 @@ const CreatePostModal = ({
             Annuler
           </button>
         </form>
+        
+        </>
+
+      )}
+        
       </div>
     </div>
   );
