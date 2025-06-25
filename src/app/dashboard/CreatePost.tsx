@@ -131,7 +131,7 @@ const CreatePostModal = ({
             type="submit"
             className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
           >
-            Suivant
+            Ajouter les images
           </button>
           <button
             onClick={onClose}
@@ -146,43 +146,13 @@ const CreatePostModal = ({
         <>
         <Header name="Téléchargement des photos" />
         <form onSubmit={handlePhotos} className="mt-5">
-       
-          {/* STOCK QUANTITY */}
-          {/* <label htmlFor="stockQuantity" className={labelCssStyles}>
-            Description
-          </label>
-          <input
-            type="text"
-            name="description"
-            placeholder="Description"
-            onChange={handleChange}
-            value={formData.content}
-            className={inputCssStyles}
-          /> */}
 
-           {/* Content */}
-          <label htmlFor="rating" className={labelCssStyles}>
-            Description
-          </label>
-          <textarea className={inputCssStyles}/>
-          {/* ADRESSE*/}
-          <label htmlFor="rating" className={labelCssStyles}>
-            Adresse
-          </label>
-          <textarea className={inputCssStyles}/>
+          <div className="flex flex-wrap gap-1 p-5 bg-gray-200 w-[650px] min-h-[300px] mx-auto mt-6 mb-10 rounded-md
+          shadow-sm">
 
-           {/* LOCATION */}
-          <div className="flex flex-row gap-3">
-          <label htmlFor="rating" className={`${labelCssStyles} mt-2`}>
-            Location
-          </label>
-          <input
-            type="checkbox"
-            name="location"
-            onChange={handleChange}
-            className="mt-2"
-          />
           </div>
+       
+          
 
           <input 
           ref={fileInputRef}
@@ -198,14 +168,7 @@ const CreatePostModal = ({
             
           }}   
           />
-          <Image
-          //selectedFile? selectedFile.name:
-              src={`${`/kinshasa.png`}`}
-              alt="maison"
-              width={150}
-              height={100}
-              className="mb-3 rounded-2xl w-100 h-100 justify-center"
-          />
+          <div className="flex justify-center">
           <button
             type="button"
             disabled={isUploading}
@@ -216,14 +179,14 @@ const CreatePostModal = ({
           >
             {isUploading ? "Chargement..." : "Parcourir"}
           </button>
-
+        </div>
           {/* CREATE ACTIONS */}
           <br/>
           <button
             type="submit"
             className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
           >
-            Créer
+            Valider
           </button>
           <button
             onClick={onClose}
@@ -232,6 +195,7 @@ const CreatePostModal = ({
           >
             Annuler
           </button>
+          
         </form>
         
         </>
