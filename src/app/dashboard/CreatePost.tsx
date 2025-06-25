@@ -147,7 +147,7 @@ const CreatePostModal = ({
         <Header name="Téléchargement des photos" />
         <form onSubmit={handlePhotos} className="mt-5">
 
-          <div className="flex flex-wrap gap-1 p-5 bg-gray-200 w-[650px] min-h-[300px] mx-auto mt-6 mb-10 rounded-md
+          <div className="flex flex-wrap gap-1 p-5 bg-gray-200 w-[900px] min-h-[300px] mx-auto mt-6 mb-10 rounded-md
           shadow-sm">
 
           </div>
