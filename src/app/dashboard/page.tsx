@@ -22,6 +22,7 @@ const Post = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {data: posts,isLoading,isError} = useGetPostsQuery();
+
   
 
   //const [createPost] = useCreateProductMutation();
@@ -80,13 +81,12 @@ const Post = () => {
             >
               <h1 className="text-lg text-gray-900 font-semibold items-center justify-between">
                  {post.location ==true ? "En Location" : "A Vendre"}
-                
               </h1>
-
+              
               <hr className="bg-white"/>
               <div className="flex flex-col bg-white">
                 <div className="items-center mt-5">
-                 {post.user[0]?.id[4]}
+                 {post.user[0]?.password}
                 <Image
                   src={post.imagepost_set[0]?.url}
                   alt={post.content}
@@ -120,7 +120,7 @@ const Post = () => {
               
                 <div className="flex flex-row justify-between gap-3 mt-2 mb-2">
                     <button className="flex gap-3">
-                    <FiUser color="red" size={20}/><p>JP{post.imagepost_set[0]?.id_post}</p>
+                    <FiUser color="red" size={20}/><p>{post.user[0]?.noms}</p>
                     </button>
                     <button className="flex items-center mt-2 bg-red-500 hover:bg-yellow-700 text-gray-200 font-bold py-2 px-4 rounded-full">
                     <FiMail color="red" className="w-5 mr-2 !text-gray-200"/><p color="red">chat</p>

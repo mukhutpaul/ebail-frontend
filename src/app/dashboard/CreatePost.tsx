@@ -3,17 +3,18 @@ import Header from "@/app/(components)/Header";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import Image from "next/image";
 
-type ProductFormData = {
-  name: string;
+type PostFormData = {
+  content: string;
   price: number;
-  stockQuantity: number;
-  rating: number;
+  location: boolean;
+  adresse: string;
+  user_id : string
 };
 
 type CreatePostModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  onCreate: (formData: ProductFormData) => void;
+  onCreate: (formData: PostFormData) => void;
 };
 
 const CreatePostModal = ({
@@ -22,11 +23,12 @@ const CreatePostModal = ({
   onCreate,
 }: CreatePostModalProps) => {
   const [formData, setFormData] = useState({
-    productId: v4(),
-    name: "",
+    id: v4(),
+    content: "",
     price: 0,
-    stockQuantity: 0,
-    rating: 0,
+    location: true,
+    adresse: "",
+    user_id: ""
   });
 
 
@@ -45,12 +47,12 @@ const CreatePostModal = ({
 
   
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement >) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]:
-        name === "price" || name === "stockQuantity" || name === "rating"
+        name === "price"
           ? parseFloat(value)
           : value,
     });
@@ -73,60 +75,43 @@ const CreatePostModal = ({
       <div className="relative top-20 mx-auto p-5 border w-4/6 shadow-lg rounded-md bg-white">
         <Header name="Créer un Post" />
         <form onSubmit={handleSubmit} className="mt-5">
-          {/* PRODUCT NAME */}
-          <div className="flex flex-row justify-between">
-          <label htmlFor="productName" className={`${labelCssStyles} flex-wrap`}>
-            Post Name
+       
+          {/* STOCK QUANTITY */}
+          {/* <label htmlFor="stockQuantity" className={labelCssStyles}>
+            Description
           </label>
-           <label htmlFor="productPrice" className={`${labelCssStyles}`}>
-            Price        
-          </label>
-        </div>
-          <div className="flex flex-row justify-between gap-3">
           <input
             type="text"
-            name="name"
-            placeholder="Name"
+            name="description"
+            placeholder="Description"
             onChange={handleChange}
-            value={formData.name}
+            value={formData.content}
             className={inputCssStyles}
-          />
+          /> */}
 
-          {/* PRICE */}
-          <input
-            type="number"
-            name="price"
-            placeholder="Price"
-            onChange={handleChange}
-            value={formData.price}
-            className={inputCssStyles}
-          />
-        </div>
-          {/* STOCK QUANTITY */}
-          <label htmlFor="stockQuantity" className={labelCssStyles}>
-            Stock Quantity
-          </label>
-          <input
-            type="number"
-            name="stockQuantity"
-            placeholder="Stock Quantity"
-            onChange={handleChange}
-            value={formData.stockQuantity}
-            className={inputCssStyles}
-          />
-
-          {/* RATING */}
+           {/* Content */}
           <label htmlFor="rating" className={labelCssStyles}>
-            Rating
+            Description
+          </label>
+          <textarea className={inputCssStyles}/>
+          {/* ADRESSE*/}
+          <label htmlFor="rating" className={labelCssStyles}>
+            Adresse
+          </label>
+          <textarea className={inputCssStyles}/>
+
+           {/* LOCATION */}
+          <div className="flex flex-row gap-3">
+          <label htmlFor="rating" className={`${labelCssStyles} mt-2`}>
+            Location
           </label>
           <input
-            type="number"
-            name="rating"
-            placeholder="image"
+            type="checkbox"
+            name="location"
             onChange={handleChange}
-            value={formData.rating}
-            className={inputCssStyles}
+            className="mt-2"
           />
+          </div>
 
           <input 
           ref={fileInputRef}

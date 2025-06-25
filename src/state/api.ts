@@ -1,13 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-
 export interface ImagePost {
   id: string;
   name: string;
   url: string;
   id_post: string;
 }
-export interface User {
+
+export interface User{
   id: string;
   last_login: string;
   is_superuser: string;
@@ -33,9 +33,9 @@ export interface Post {
   location: boolean;
   adresse: string;
   price: number;
-  user : User[];
   created_at: string;
   imagepost_set: ImagePost[];
+  user : User[];
 }
 
 export interface NewPost {
@@ -51,7 +51,6 @@ export const api = createApi({
   reducerPath: "api",
   tagTypes: ["DashboardMetrics", "Posts", "Users", "Expenses"],
   endpoints: (build) => ({
-
 
     getPosts: build.query<Post[],void>({
       query: (search) => ({
